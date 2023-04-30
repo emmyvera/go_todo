@@ -1,0 +1,13 @@
+version: "2"
+sql:
+  - engine: "postgresql" # tell sqlc which db flavor we are using
+    queries: "./db/query/" # tells sqlc where to look for the queries file
+    schema: "./db/migration/" # tells sqlc where the migration files are 
+    
+    gen:      
+      go:
+        package: "db" # tell sqlc the name of the go package that will be generated
+        out: "./db/sqlc"  # path to store the golang code               
+        emit_json_tags: true # this will add json text to the generated structs 
+        emit_empty_slices: fals e
+        emit_interface: false
