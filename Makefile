@@ -16,4 +16,7 @@ migrateup:
 migratedown:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/todo_db?sslmode=disable" -verbose down
 
-.PHONY: postgres createdb dropdb migrateup migratedown create_init_migration
+server:
+	go run main.go
+
+.PHONY: postgres createdb dropdb migrateup migratedown create_init_migration server
