@@ -43,7 +43,7 @@ func (server *Server) createTodo(ctx *gin.Context) {
 }
 
 type getTodoRequest struct {
-	ID string `url:"id" binding:"required,min=1"`
+	ID int64 `url:"id" binding:"required,min=1"`
 }
 
 // To handle the GET request to get a specifix todo
@@ -73,6 +73,8 @@ type listTodoRequest struct {
 	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
 }
 
+// To handle the GET request to get a all todo
+// Also has pagination functionality
 func (server *Server) listTodo(ctx *gin.Context) {
 	var req listTodoRequest
 
@@ -97,7 +99,7 @@ func (server *Server) listTodo(ctx *gin.Context) {
 }
 
 type updateTodoRequestUri struct {
-	ID string `url:"id" binding:"required,min=1"`
+	ID int64 `url:"id" binding:"required,min=1"`
 }
 
 type updateTodoRequestBody struct {
@@ -106,6 +108,7 @@ type updateTodoRequestBody struct {
 	DueDate time.Time `json:"due_date" binding:"required"`
 }
 
+// To handle the PUT request to update a specifix todo
 func (server *Server) updateTodo(ctx *gin.Context) {
 	var req updateTodoRequestUri
 	var reqBody updateTodoRequestBody
@@ -143,9 +146,10 @@ func (server *Server) updateTodo(ctx *gin.Context) {
 }
 
 type delTodoRequest struct {
-	ID string `url:"id" binding:"required,min=1"`
+	ID int64 `url:"id" binding:"required,min=1"`
 }
 
+// To handle the DELETE request to delete a specifix todo
 func (server *Server) delTodo(ctx *gin.Context) {
 	var req delTodoRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {

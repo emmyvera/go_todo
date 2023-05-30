@@ -16,6 +16,15 @@ migrateup:
 migratedown:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/todo_db?sslmode=disable" -verbose down
 
+sqlc:
+	sqlc generate
+
+test: 
+	go test -v -cover ./...
+
+mock:
+	mockgen -package mockdb -destination db/mock/store.go github.com/emmyvera/go_todo/db/sqlc Store
+
 server:
 	go run main.go
 

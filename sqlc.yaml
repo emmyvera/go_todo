@@ -10,4 +10,4 @@ sql:
         out: "./db/sqlc"  # path to store the golang code               
         emit_json_tags: true # this will add json text to the generated structs 
         emit_empty_slices: false
-        emit_interface: false
+        emit_interface: true # Generate interface for each db queries

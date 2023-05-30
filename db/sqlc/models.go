@@ -9,7 +9,7 @@ import (
 )
 
 type Todo struct {
-	ID        string    `json:"id"`
+	ID        int64     `json:"id"`
 	Title     string    `json:"title"`
 	Note      string    `json:"note"`
 	DueDate   time.Time `json:"due_date"`

@@ -45,7 +45,7 @@ DELETE FROM todos
 WHERE id = $1
 `
 
-func (q *Queries) DeleteTodo(ctx context.Context, id string) error {
+func (q *Queries) DeleteTodo(ctx context.Context, id int64) error {
 	_, err := q.db.ExecContext(ctx, deleteTodo, id)
 	return err
 }
@@ -55,7 +55,7 @@ SELECT id, title, note, due_date, created_at FROM todos
 WHERE id = $1 LIMIT 1
 `
 
-func (q *Queries) GetTodo(ctx context.Context, id string) (Todo, error) {
+func (q *Queries) GetTodo(ctx context.Context, id int64) (Todo, error) {
 	row := q.db.QueryRowContext(ctx, getTodo, id)
 	var i Todo
 	err := row.Scan(
@@ -119,7 +119,7 @@ RETURNING id, title, note, due_date, created_at
 `
 
 type UpdateTodoParams struct {
-	ID      string    `json:"id"`
+	ID      int64     `json:"id"`
 	Title   string    `json:"title"`
 	Note    string    `json:"note"`
 	DueDate time.Time `json:"due_date"`
